@@ -28,7 +28,10 @@
 
       <div class="image-grid">
         <article class="image-card">
-          <img id="primaryImage" src="right-breast.jpg" alt="Обрана грудна залоза" />
+          <div class="image-stage">
+            <img id="primaryImage" src="right-breast.jpg" alt="Обрана грудна залоза" />
+            <div id="lesionOverlay" class="lesion-overlay" aria-live="polite"></div>
+          </div>
           <button id="savePrimary" class="save-button" type="button">Зберегти зображення</button>
         </article>
       </div>
@@ -40,10 +43,8 @@
         </div>
         <div id="massesTable" class="table-shell" role="table" aria-label="Таблиця утворів">
           <div class="table-row table-header" role="row">
-            <span role="columnheader">№ утвору</span>
-            <span role="columnheader">Локалізація</span>
-            <span role="columnheader">Розмір</span>
-            <span role="columnheader">Дії</span>
+            <span role="columnheader">№ ураження</span>
+            <span role="columnheader">Назва утвору</span>
           </div>
         </div>
       </section>
