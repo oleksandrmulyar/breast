@@ -22,7 +22,6 @@
       </div>
     </section>
 
-    
     <section id="detailView" class="detail-view hidden" aria-labelledby="detailTitle">
       <button id="backToSelection" class="back-button" type="button">← Назад до вибору</button>
       <h1 id="detailTitle" class="sr-only">Меню грудної залози</h1>
@@ -30,38 +29,19 @@
       <div class="image-grid">
         <article class="image-card">
           <img id="primaryImage" src="right-breast.jpg" alt="Обрана грудна залоза" />
-          <button id="savePrimary" class="save-button" type="button">Зберегти зображення 1</button>
-        </article>
-        <article class="image-card">
-          <img id="secondaryImage" src="left-breast.jpg" alt="Парна грудна залоза" />
-          <button id="saveSecondary" class="save-button" type="button">Зберегти зображення 2</button>
+          <button id="savePrimary" class="save-button" type="button">Зберегти зображення</button>
         </article>
       </div>
 
       <section class="simple-section" aria-labelledby="massesTitle">
         <div class="section-heading">
           <h2 id="massesTitle">Утвори</h2>
-          <button class="round-add" type="button" aria-label="Додати утвір">+</button>
+          <button id="addMass" class="round-add" type="button" aria-label="Додати утвір">+</button>
         </div>
-        <div class="table-shell" role="table" aria-label="Таблиця утворів">
+        <div id="massesTable" class="table-shell" role="table" aria-label="Таблиця утворів">
           <div class="table-row table-header" role="row">
             <span role="columnheader">№ утвору</span>
             <span role="columnheader">Локалізація</span>
-            <span role="columnheader">Розмір</span>
-            <span role="columnheader">Дії</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="simple-section" aria-labelledby="nodesTitle">
-        <div class="section-heading">
-          <h2 id="nodesTitle">Лімфатичні вузли</h2>
-          <button class="round-add" type="button" aria-label="Додати лімфатичний вузол">+</button>
-        </div>
-        <div class="table-shell" role="table" aria-label="Таблиця лімфатичних вузлів">
-          <div class="table-row table-header" role="row">
-            <span role="columnheader">№ вузла</span>
-            <span role="columnheader">Назва</span>
             <span role="columnheader">Розмір</span>
             <span role="columnheader">Дії</span>
           </div>

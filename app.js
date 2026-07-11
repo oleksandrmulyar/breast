@@ -14,14 +14,11 @@ const breastImages = {
 const sideSelection = document.querySelector('#sideSelection');
 const detailView = document.querySelector('#detailView');
 const primaryImage = document.querySelector('#primaryImage');
-const secondaryImage = document.querySelector('#secondaryImage');
 const savePrimary = document.querySelector('#savePrimary');
-const saveSecondary = document.querySelector('#saveSecondary');
+const massesTable = document.querySelector('#massesTable');
+const addMass = document.querySelector('#addMass');
 let activeSide = 'right';
-
-function oppositeSide(side) {
-  return side === 'right' ? 'left' : 'right';
-}
+let massCount = 0;
 
 function setImage(image, side) {
   image.src = breastImages[side].src;
@@ -31,9 +28,7 @@ function setImage(image, side) {
 function openDetail(side) {
   activeSide = side;
   setImage(primaryImage, activeSide);
-  setImage(secondaryImage, oppositeSide(activeSide));
-  savePrimary.textContent = `Зберегти зображення 1`;
-  saveSecondary.textContent = `Зберегти зображення 2`;
+  savePrimary.textContent = 'Зберегти зображення';
   sideSelection.classList.add('hidden');
   detailView.classList.remove('hidden');
 }
@@ -41,6 +36,32 @@ function openDetail(side) {
 function backToSelection() {
   detailView.classList.add('hidden');
   sideSelection.classList.remove('hidden');
+}
+
+function addMassRow() {
+  massCount += 1;
+
+  const row = document.createElement('div');
+  row.className = 'table-row table-body-row';
+  row.setAttribute('role', 'row');
+
+  row.innerHTML = `
+    <span role="cell">${massCount}</span>
+    <label role="cell">
+      <span class="sr-only">Локалізація утвору ${massCount}</span>
+      <input type="text" name="mass-location-${massCount}" />
+    </label>
+    <label role="cell">
+      <span class="sr-only">Розмір утвору ${massCount}</span>
+      <input type="text" name="mass-size-${massCount}" />
+    </label>
+    <span role="cell">
+      <button class="delete-row" type="button" aria-label="Видалити утвір ${massCount}">×</button>
+    </span>
+  `;
+
+  row.querySelector('.delete-row').addEventListener('click', () => row.remove());
+  massesTable.append(row);
 }
 
 async function saveImage(side, fileName) {
@@ -61,8 +82,5 @@ document.querySelectorAll('.choice-card').forEach((card) => {
 });
 
 document.querySelector('#backToSelection').addEventListener('click', backToSelection);
+addMass.addEventListener('click', addMassRow);
 savePrimary.addEventListener('click', () => saveImage(activeSide, `${breastImages[activeSide].label}.jpg`));
-saveSecondary.addEventListener('click', () => {
-  const side = oppositeSide(activeSide);
-  saveImage(side, `${breastImages[side].label}.jpg`);
-});
