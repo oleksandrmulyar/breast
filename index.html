@@ -12,9 +12,12 @@
       <div>
         <p class="eyebrow">УЗД / мамологія</p>
         <h1>Схема грудних залоз</h1>
-        <p class="lead">Додавайте утвори на праву або ліву грудну залозу, переміщуйте їх по зображенню та змінюйте розмір і форму.</p>
+        <p class="lead">Позначайте утвори на правій або лівій грудній залозі, змінюйте форму, розмір і опис — у форматі, готовому для протоколу.</p>
       </div>
-      <button id="clearAll" class="ghost" type="button">Очистити все</button>
+      <div class="hero-actions">
+        <button id="exportReport" class="ghost" type="button">Скопіювати опис</button>
+        <button id="clearAll" class="ghost danger-text" type="button">Очистити все</button>
+      </div>
     </header>
 
     <section class="toolbar" aria-label="Панель інструментів">
@@ -35,26 +38,31 @@
         </select>
       </div>
       <div class="field compact">
-        <label for="lesionWidth">Ширина</label>
-        <input id="lesionWidth" type="range" min="24" max="220" value="86" />
+        <label for="lesionWidth">Ширина, мм</label>
+        <input id="lesionWidth" type="number" min="1" max="200" value="18" />
       </div>
       <div class="field compact">
-        <label for="lesionHeight">Висота</label>
-        <input id="lesionHeight" type="range" min="18" max="180" value="58" />
+        <label for="lesionHeight">Висота, мм</label>
+        <input id="lesionHeight" type="number" min="1" max="200" value="12" />
+      </div>
+      <div class="field">
+        <label for="lesionNote">Коментар</label>
+        <input id="lesionNote" type="text" placeholder="наприклад: гіпоехогенний" />
       </div>
       <button id="addLesion" type="button">+ Додати утвір</button>
       <button id="deleteLesion" class="danger" type="button" disabled>Видалити вибраний</button>
     </section>
 
     <section class="workspace">
-      <aside class="help">
+      <aside class="panel help">
         <h2>Керування</h2>
         <ul>
           <li>Натисніть «Додати утвір», щоб розмістити маркер по центру активного зображення.</li>
           <li>Перетягуйте утвір мишею або пальцем.</li>
           <li>Тягніть білий маркер у правому нижньому куті, щоб змінити розмір.</li>
-          <li>Змінюйте форму та розміри через панель зверху для вибраного утвору.</li>
+          <li>Поля зверху редагують вибраний утвір і одразу оновлюють опис.</li>
         </ul>
+        <div class="status" id="status" role="status" aria-live="polite">Готово до роботи</div>
       </aside>
 
       <div class="canvas-card">
@@ -64,18 +72,20 @@
         </div>
         <div id="stage" class="stage" aria-label="Схема грудної залози">
           <img id="breastImage" src="right-breast.jpg" alt="Права грудна залоза" draggable="false" />
-          <svg id="overlay" class="overlay" viewBox="0 0 1000 520" preserveAspectRatio="none"></svg>
+          <svg id="overlay" class="overlay" viewBox="0 0 1573 812" preserveAspectRatio="none"></svg>
         </div>
       </div>
+
+      <aside class="panel report-panel">
+        <div class="report-heading">
+          <h2>Опис</h2>
+          <span id="lesionCount" class="badge">0</span>
+        </div>
+        <ol id="lesionList" class="lesion-list"></ol>
+        <textarea id="reportText" rows="8" readonly aria-label="Текстовий опис утворів"></textarea>
+      </aside>
     </section>
   </main>
-
-  <template id="lesionTemplate">
-    <g class="lesion" tabindex="0">
-      <path class="lesion-shape"></path>
-      <circle class="handle" r="8"></circle>
-    </g>
-  </template>
 
   <script src="app.js"></script>
 </body>
