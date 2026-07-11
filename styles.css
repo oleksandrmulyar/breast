@@ -167,7 +167,7 @@ h1 {
 
 .table-row {
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 1fr .7fr;
+  grid-template-columns: 180px minmax(240px, 1fr);
   gap: 18px;
   align-items: center;
   min-height: 38px;
@@ -194,18 +194,6 @@ h1 {
   color: var(--ink);
 }
 
-.delete-row {
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border: 1px solid #cdd2da;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--ink);
-  font-size: 20px;
-  line-height: 1;
-  cursor: pointer;
-}
 
 .sr-only {
   position: absolute;
@@ -226,4 +214,36 @@ h1 {
   .image-grid { grid-template-columns: 1fr; }
   .image-card { min-height: 420px; }
   .table-row { grid-template-columns: 1fr; gap: 4px; padding: 10px 14px; }
+}
+
+.image-stage {
+  position: relative;
+  width: 100%;
+  max-height: 520px;
+}
+
+.image-stage img {
+  display: block;
+}
+
+.lesion-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.lesion-marker {
+  position: absolute;
+  display: inline-grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 3px solid #f13d3d;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .72);
+  color: #f13d3d;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  transform: translate(-50%, -50%);
 }
