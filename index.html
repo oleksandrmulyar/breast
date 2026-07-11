@@ -3,87 +3,69 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Грудні залози — схема утворів</title>
+  <title>Грудні залози — просте меню</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="app">
-    <header class="hero">
-      <div>
-        <p class="eyebrow">УЗД / мамологія</p>
-        <h1>Схема грудних залоз</h1>
-        <p class="lead">Позначайте утвори на правій або лівій грудній залозі, змінюйте форму, розмір і опис — у форматі, готовому для протоколу.</p>
+    <section id="sideSelection" class="selection-view" aria-labelledby="selectionTitle">
+      <h1 id="selectionTitle">Оберіть грудну залозу</h1>
+      <div class="choice-grid" role="list">
+        <button class="choice-card" type="button" data-side="right" role="listitem">
+          <img src="right-breast.jpg" alt="Схема правої грудної залози" />
+          <span>Права<br />грудна залоза</span>
+        </button>
+        <button class="choice-card" type="button" data-side="left" role="listitem">
+          <img src="left-breast.jpg" alt="Схема лівої грудної залози" />
+          <span>Ліва<br />грудна залоза</span>
+        </button>
       </div>
-      <div class="hero-actions">
-        <button id="exportReport" class="ghost" type="button">Скопіювати опис</button>
-        <button id="clearAll" class="ghost danger-text" type="button">Очистити все</button>
-      </div>
-    </header>
-
-    <section class="toolbar" aria-label="Панель інструментів">
-      <div class="field">
-        <label for="breastSide">Зображення</label>
-        <select id="breastSide">
-          <option value="right">Права грудна залоза</option>
-          <option value="left">Ліва грудна залоза</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="lesionShape">Форма утвору</label>
-        <select id="lesionShape">
-          <option value="ellipse">Овал</option>
-          <option value="circle">Коло</option>
-          <option value="lobulated">Лобульована</option>
-          <option value="irregular">Нерівна</option>
-        </select>
-      </div>
-      <div class="field compact">
-        <label for="lesionWidth">Ширина, мм</label>
-        <input id="lesionWidth" type="number" min="1" max="200" value="18" />
-      </div>
-      <div class="field compact">
-        <label for="lesionHeight">Висота, мм</label>
-        <input id="lesionHeight" type="number" min="1" max="200" value="12" />
-      </div>
-      <div class="field">
-        <label for="lesionNote">Коментар</label>
-        <input id="lesionNote" type="text" placeholder="наприклад: гіпоехогенний" />
-      </div>
-      <button id="addLesion" type="button">+ Додати утвір</button>
-      <button id="deleteLesion" class="danger" type="button" disabled>Видалити вибраний</button>
     </section>
 
-    <section class="workspace">
-      <aside class="panel help">
-        <h2>Керування</h2>
-        <ul>
-          <li>Натисніть «Додати утвір», щоб розмістити маркер по центру активного зображення.</li>
-          <li>Перетягуйте утвір мишею або пальцем.</li>
-          <li>Тягніть білий маркер у правому нижньому куті, щоб змінити розмір.</li>
-          <li>Поля зверху редагують вибраний утвір і одразу оновлюють опис.</li>
-        </ul>
-        <div class="status" id="status" role="status" aria-live="polite">Готово до роботи</div>
-      </aside>
+    <section id="detailView" class="detail-view hidden" aria-labelledby="detailTitle">
+      <button id="backToSelection" class="back-button" type="button">← Назад до вибору</button>
+      <h1 id="detailTitle" class="sr-only">Меню грудної залози</h1>
 
-      <div class="canvas-card">
-        <div class="image-switch" role="tablist" aria-label="Вибір грудної залози">
-          <button class="tab active" data-side="right" type="button">Права</button>
-          <button class="tab" data-side="left" type="button">Ліва</button>
-        </div>
-        <div id="stage" class="stage" aria-label="Схема грудної залози">
-          <img id="breastImage" src="right-breast.jpg" alt="Права грудна залоза" draggable="false" />
-          <svg id="overlay" class="overlay" viewBox="0 0 1573 812" preserveAspectRatio="none"></svg>
-        </div>
+      <div class="image-grid">
+        <article class="image-card">
+          <img id="primaryImage" src="right-breast.jpg" alt="Обрана грудна залоза" />
+          <button id="savePrimary" class="save-button" type="button">Зберегти зображення 1</button>
+        </article>
+        <article class="image-card">
+          <img id="secondaryImage" src="left-breast.jpg" alt="Парна грудна залоза" />
+          <button id="saveSecondary" class="save-button" type="button">Зберегти зображення 2</button>
+        </article>
       </div>
 
-      <aside class="panel report-panel">
-        <div class="report-heading">
-          <h2>Опис</h2>
-          <span id="lesionCount" class="badge">0</span>
+      <section class="simple-section" aria-labelledby="massesTitle">
+        <div class="section-heading">
+          <h2 id="massesTitle">Утвори</h2>
+          <button class="round-add" type="button" aria-label="Додати утвір">+</button>
         </div>
-        <ol id="lesionList" class="lesion-list"></ol>
-        <textarea id="reportText" rows="8" readonly aria-label="Текстовий опис утворів"></textarea>
-      </aside>
+        <div class="table-shell" role="table" aria-label="Таблиця утворів">
+          <div class="table-row table-header" role="row">
+            <span role="columnheader">№ утвору</span>
+            <span role="columnheader">Локалізація</span>
+            <span role="columnheader">Розмір</span>
+            <span role="columnheader">Дії</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="simple-section" aria-labelledby="nodesTitle">
+        <div class="section-heading">
+          <h2 id="nodesTitle">Лімфатичні вузли</h2>
+          <button class="round-add" type="button" aria-label="Додати лімфатичний вузол">+</button>
+        </div>
+        <div class="table-shell" role="table" aria-label="Таблиця лімфатичних вузлів">
+          <div class="table-row table-header" role="row">
+            <span role="columnheader">№ вузла</span>
+            <span role="columnheader">Назва</span>
+            <span role="columnheader">Розмір</span>
+            <span role="columnheader">Дії</span>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 
